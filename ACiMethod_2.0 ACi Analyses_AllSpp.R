@@ -7,18 +7,8 @@
 ##                    ##
 
 # This script analyses all species together. It reads of a 
-# master dataset created for data repository.
-# I have found some differences with fits from individual scripts.
-# Let's continue with this script, because we are removing some datapoints.
-#
-# In here: 
-#   1. removing extra 400CO2 points in monotonic and split protocols.
-#   2. analyse all data
-#   3. test the effect of the later leg on split protocols
-#
-# I think this could become the only script with all the analyses.
-#
-# I'm removing a lot of unnecessary lines... go find them in the individual scripts.
+# master dataset from data repository (https://datadryad.org/stash/dataset/doi:10.5061/dryad.pk0p2ngst).
+# Please refer to the method section of the repository for further information.
 
 rm(list= ls(all.names = T))
 
@@ -261,12 +251,6 @@ AllACiFits <- AllACi.df  %>% filter(!is.na(A)) %>%
          Plant = ifelse(Species == "Tobacco", RunID %>% strsplit(split = "_") %>% do.call(rbind, .) %>% .[,4], Plant),
          Species = ifelse(Species == "At", "Arabidopsis", Species))
 AllACiFits %>% with(table(Species, Plant))
-
-## This script is very smooth, I don't think there is a need
-## to export dataset.
-# write.csv(AllACiFits, "//es.msu.edu/prl/labs/walker/General Project Storage/Mauri TN/Data&Analyses/Collaborations/ACi Protocols/ACiParams/ACiParamsAllSpp.csv",
-          # row.names = F)
-# AllACiFits <- read.csv("//es.msu.edu/prl/labs/walker/General Project Storage/Mauri TN/Data&Analyses/Collaborations/ACi Protocols/ACiParams/ACiParamsAllSpp.csv")
 
 ## __ ii) Protocol effect on ACi params ----
 AllACiFits.lng <- AllACiFits %>% 
